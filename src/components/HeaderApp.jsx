@@ -1,21 +1,14 @@
 import React from 'react'
 import logo from '../logo.svg'
 import storeConfig from '../data/storeConfig.json'
+import { Cart } from './Cart/Cart'
 import { Row, Navbar, Container } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-
-const iconCart = <FontAwesomeIcon icon={faShoppingCart} />
-
-const styleCart = {
-  color: '#fff'
-}
 
 export const HeaderApp = () => {
   return (
     
-      <Row>
-        <Navbar bg="dark" variant="dark">
+      <Row style={ {marginBottom: '100px'} }>
+        <Navbar bg="dark" variant="dark" fixed="top">
           <Container>
             <Navbar.Brand href="#">
               <img
@@ -29,7 +22,7 @@ export const HeaderApp = () => {
             </Navbar.Brand>
 
             <div className="float-right">
-              <a href="#" style={styleCart}> { iconCart } </a>
+              <Cart/>
             </div>
             
           </Container>
