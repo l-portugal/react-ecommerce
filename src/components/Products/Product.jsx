@@ -1,13 +1,8 @@
 import React from 'react'
+import { ButtonAddProduct } from './ButtonAddProduct'
 import { Col, Card, Button } from "react-bootstrap"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-import db from '../../app/db/db'
-
-import { toast } from 'react-toastify';
-
-const iconCart = <FontAwesomeIcon icon={faShoppingCart} />
+import { Link } from 'react-router-dom'
 
 const styles = {
   fontSize: '16px',
@@ -23,20 +18,7 @@ const stylesImg = {
 
 export const Product = ({ item }) => {
 
-  const { title, price, image } = item
-
-  const addProductCart = (product) => {
-    db.cart.add({
-      title: product.title,
-      price: product.price,
-      category: product.category
-    })
-
-    notify(`AGREGADO: ${product.title}`)
-
-  }
-
-  const notify = (msg) => toast.success(msg);
+  const { title, price, image, id } = item
 
   return (
 
@@ -53,8 +35,11 @@ export const Product = ({ item }) => {
         <Card.Footer>
           Precio: <strong> {price} $ </strong>
           <hr />
-          <Button variant="secondary" className="btn-sm" onClick={() => addProductCart(item)}> {iconCart} Agregar </Button>
-
+          <ButtonAddProduct className="btn-sm" product={item}/>
+          {'  '}
+          <Link to={`/product/${id}`}>
+            <Button variant="secondary" className="btn-sm"> Ver detalles </Button>
+          </Link>
         </Card.Footer>
 
       </Card>
