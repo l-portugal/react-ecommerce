@@ -11,7 +11,15 @@ const iconDeleteCart = <FontAwesomeIcon icon={faTrash} />
 const iconPayCart = <FontAwesomeIcon icon={faCreditCard} />
 
 const styleCart = {
-  color: '#fff'
+  color: '#fff',
+  marginTop: '7%',
+  marginLeft: '15px'
+}
+
+const badgeStyle = { 
+  fontSize: '10px', 
+  marginTop: '0', 
+  position: 'absolute'
 }
 
 export const CartModal = () => {
@@ -21,7 +29,7 @@ export const CartModal = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [productsCart, setProductsCart] = useState(null)
+  const [productsCart, setProductsCart] = useState(null);
   const [totalProducts, setTotalProducts] = useState(0);
   
   useEffect( () => {
@@ -37,7 +45,7 @@ export const CartModal = () => {
     <>
       <a href="#" style={styleCart} onClick={handleShow}>
         {iconCart}
-        <Badge bg="warning" text="dark"> { totalProducts } </Badge>
+        <Badge bg="warning" text="dark" style={ badgeStyle }> { totalProducts } </Badge>
       </a>
 
       <Modal show={show} onHide={handleClose} size="lg">

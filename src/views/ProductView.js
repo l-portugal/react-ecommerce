@@ -25,40 +25,46 @@ export const ProductView = (props) => {
     <Container>
       <Row>
 
-        <Col md={{ span: 4, offset: 2 }}>
-          {ProductDetails && <img src={ProductDetails.image} width={300} alt={ProductDetails.title} />}
-          <hr />
-          <Row style={ { textAlign: 'justify' } }>
-            <h4>Descripción</h4>
-            {ProductDetails && ProductDetails.description}
-          </Row>
-        </Col>
-        <Col md={{ span: 3, offset: 1}}>
+      { !ProductDetails ? 
+        ( <div> <h3> Cargando...</h3></div>)  
+        :
+        (
+        <Row>
+          <Col md={{ span: 4, offset: 2 }}>
+            { ProductDetails && <img src={ProductDetails.image} width={300} alt={ProductDetails.title} />}
+            <hr />
+            <Row style={ { textAlign: 'justify' } }>
+              <h4>Descripción</h4>
+              {ProductDetails && ProductDetails.description}
+            </Row>
+          </Col>
+          <Col md={{ span: 3, offset: 1}}>
 
-          <Card>
+            <Card>
 
-            <Card.Header>  
-              <span style={{ color: '#ffc107', fontSize: '16px' }}>
-                {iconStar} {iconStar} {iconStar} {iconStarHalf} {iconStarEmpty}
-              </span>
-              <span style={{ color: '#808080', fontSize: '16px' }}>
-                - { ProductDetails && ProductDetails.rating.count } opiniones
-              </span>
-            </Card.Header>
-            
-            <Card.Body style={ { textAlign: 'center' } }>
-              {ProductDetails && <h4> {ProductDetails.title.toUpperCase()} </h4>}
-
+              <Card.Header>  
+                <span style={{ color: '#ffc107', fontSize: '16px' }}>
+                  {iconStar} {iconStar} {iconStar} {iconStarHalf} {iconStarEmpty}
+                </span>
+                <span style={{ color: '#808080', fontSize: '16px' }}>
+                  - { ProductDetails && ProductDetails.rating.count } opiniones
+                </span>
+              </Card.Header>
               
-              {ProductDetails && <h2> {ProductDetails.price} $ </h2>}
-              <ButtonAddProduct className="btn-lg" product={ProductDetails}/>
-            </Card.Body>
+              <Card.Body style={ { textAlign: 'center' } }>
+                {ProductDetails && <h4> {ProductDetails.title.toUpperCase()} </h4>}
 
-          
-          </Card>
+                
+                {ProductDetails && <h2> {ProductDetails.price} $ </h2>}
+                <ButtonAddProduct className="btn-lg" product={ProductDetails}/>
+              </Card.Body>
 
-        </Col>
+            
+            </Card>
 
+          </Col>
+        </Row>
+        )}
       </Row>
     </Container>
   )
