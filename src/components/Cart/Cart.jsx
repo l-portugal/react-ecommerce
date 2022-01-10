@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { CartItem } from './CartItem'
-import { getProductsCart } from '../../app/services/cartService'
 import { Table } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { cartProducts } from '../../redux/actions/cart/cartActions'
 
 export const Cart = (props) => {
-
-  const [ productsCart, setProductsCart] = useState(null)
+  
+  const productsCart = useSelector ( (state) => state.cartReducer.products )
+  const dispatcher = useDispatch();
 
   useEffect( () => {
-    getProductsCart()
-      .then( (productsCart) => { setProductsCart(productsCart) })
-      .catch( (err) => { console.log(err)} )
-  },[productsCart])
+    dispatcher(cartProducts())
+  },[dispatcher])
 
   const getTotalPrice = () => {
     const totalPrice = productsCart?.reduce((totalPrice, nextProduct) => totalPrice + nextProduct.price, 0);

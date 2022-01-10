@@ -1,26 +1,26 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Product } from './Product'
-import { getAllProducts } from '../../app/services/productServices';
 import { Row } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import { allProducts } from '../../redux/actions/products/productActions';
 
 export const ListProducts = ( ) => {
 
-  const [products, setProducts] = useState([]);
+  const productsFilter = useSelector( (state) => state.productsReducer.productsFilter);
+  const dispatcher = useDispatch();
 
   useEffect( () => {
-       getAllProducts()
-        .then( (products) => { setProducts(products) } )
-        .catch( (err) => console.log(err) )
-  },[])
+    dispatcher(allProducts())
+  },[dispatcher])
 
   return (
     <Row>
-      { products.length === 0 ? (
+      { productsFilter.length === 0 ? (
           <div>
             <p>Cargando productos... </p>
           </div>
         ) : (
-          products && products.map((product, index) => {
+          productsFilter && productsFilter.map((product, index) => {
         return <Product item={product} key={index}></Product>
       })
     )}

@@ -4,14 +4,18 @@ import { deleteProductCart } from '../../app/services/cartService'
 import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
+import { cartProducts } from '../../redux/actions/cart/cartActions'
 
 const iconDeleteCart = <FontAwesomeIcon icon={faTrash} />
 
 export const CartItem = ({ index, tableId, productId, title, price, category, closeModal }) => {
   
+  const dispatcher = useDispatch();
+
   const deleteProduct = () => {
     deleteProductCart(tableId)
-      .then()
+      .then( () => dispatcher(cartProducts()) )
       .catch()
   }
 
