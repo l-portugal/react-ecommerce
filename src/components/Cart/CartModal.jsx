@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Cart } from './Cart'
-import { getProductsCart, deleteCart } from '../../app/services/cartService'
+import { cartProducts } from '../../redux/actions/cart/cartActions'
+import { deleteCart } from '../../app/services/cartService'
 import { Button, Modal, Badge } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faTrash, faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const iconCart = <FontAwesomeIcon icon={faShoppingCart} />
 const iconDeleteCart = <FontAwesomeIcon icon={faTrash} />
@@ -29,17 +32,17 @@ export const CartModal = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [productsCart, setProductsCart] = useState(null);
-  const [totalProducts, setTotalProducts] = useState(0);
-  
+  const totalProducts = useSelector ( (state) => state.cartReducer.countCartProducts )
+  const dispatcher = useDispatch()
+
   useEffect( () => {
-    getProductsCart()
-      .then( (productsCart) => { 
-                setProductsCart(productsCart); 
-                setTotalProducts(productsCart.length) 
-      })
-      .catch( (err) => { console.log(err)} )
-  },[productsCart] )
+    dispatcher(cartProducts())
+  },[dispatcher])
+
+  const deleteCartButton = () => {
+    deleteCart();
+    dispatcher(cartProducts())
+  }
 
   return (
     <>
@@ -53,7 +56,7 @@ export const CartModal = () => {
           <Modal.Title>Carrito</Modal.Title>
 
           <div style={{ width: '100%' }}>
-            <Button variant="danger" className="btn-sm float-end" onClick={deleteCart}>
+            <Button variant="danger" className="btn-sm float-end" onClick={deleteCartButton}>
               {iconDeleteCart} Vaciar
             </Button>
           </div>

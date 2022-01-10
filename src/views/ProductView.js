@@ -58,7 +58,6 @@ export const ProductView = (props) => {
                 {ProductDetails && <h2> {ProductDetails.price} $ </h2>}
                 <ButtonAddProduct className="btn-lg" product={ProductDetails}/>
               </Card.Body>
-
             
             </Card>
 
