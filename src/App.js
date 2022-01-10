@@ -5,6 +5,7 @@ import { FooterApp } from './components/FooterApp';
 import { HomeView } from './views/HomeView';
 import { CartView } from './views/CartView';
 import { ProductView } from './views/ProductView';
+import { ProductsFilterView } from './views/ProductsFilterView';
 import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' exact component={ HomeView } />
           <Route path='/cart' exact component={ CartView } />
           <Route path='/product/:id' exact component={ ProductView } />
+          <Route path='/products/:categoryName' exact component={ ProductsFilterView } />
           <Route render={ () => <> <h1>404 No Encontrado</h1> <Link to="/">Ir a página principal</Link> </>} />
         </Switch>
       <FooterApp/>
