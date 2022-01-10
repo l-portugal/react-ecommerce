@@ -1,11 +1,27 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { deleteProductCart } from '../../app/services/cartService'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const CartItem = ({index, id,  title, price, category}) => (
-    // <Dropdown.Item href="#">{title} - $ {price} - {category}</Dropdown.Item>
-    <tr>
-      <td>{ index + 1 }</td>
-      <td>{ title }</td>
-      <td>{ category }</td>
-      <td>$ { price }</td>
+const iconDeleteCart = <FontAwesomeIcon icon={faTrash} />
+
+export const CartItem = ({ index, tableId, productId, title, price, category, closeModal }) => {
+  
+  const deleteProduct = () => {
+    deleteProductCart(tableId)
+      .then()
+      .catch()
+  }
+
+  return (
+    <tr style={{ textAlign: 'left' }}>
+      <td>{index + 1}</td>
+      <td><Link to={`/product/${productId}`} onClick={closeModal} style={{ textDecoration: 'none' }}> {title}</Link></td>
+      <td>{category}</td>
+      <td>$ {price}</td>
+      <td> <Button variant="danger" className="btn-sm" onClick={deleteProduct}> {iconDeleteCart} </Button> </td>
     </tr>
-)
+  )
+}

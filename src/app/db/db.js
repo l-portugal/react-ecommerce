@@ -4,7 +4,7 @@ const db = new Dexie('reactStoreLr');
 
 //esquema
 db.version(1).stores({
-  cart: '++id, title, price, category'
+  cart: '++id, productId, title, price, category'
 });
 
 export default db;

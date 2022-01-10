@@ -11,6 +11,14 @@ const styles = {
   height: '100px'
 }
 
+const footerStyles = {
+  position:'fixed',
+  left:'0',
+  bottom:'0',
+  right:'0',
+  zIndex:'1 !important'
+}
+
 const styleLogo = {
   margin: '0 auto',
   display: 'block'
@@ -25,7 +33,7 @@ const currentYear = new Date().getFullYear();
 
 export const FooterApp = () => {
   return (
-    <div>
+    <div id="footer" style={footerStyles}>
       
       <Row style={styles}>
         <Container>
